@@ -1,7 +1,7 @@
 <template>
 <div id="app">
   <Header/>
-  <Formulario/>
+  <Form/>
 </div>
   
 </template>
@@ -10,13 +10,13 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Header from './components/Header.vue'
-import Formulario from './components/Formulario.vue'
+import Form from './components/Form.vue'
 
 export default {
   name: 'app',
   components: {
       Header,
-      Formulario
+      Form,
   },
   data () {
     return {

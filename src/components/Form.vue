@@ -1,54 +1,41 @@
 <template>
   <div>
     <div class="form">
-        <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-          <b-form-group
-            id="input-group-1"
-            label="Email:"
-            label-for="input-1"
-            description="We'll never share your email with anyone else."
-          >
-            <b-form-input
-              id="input-1"
-              v-model="form.email"
-              type="email"
-              placeholder="Enter email"
-              required
-            ></b-form-input>
-          </b-form-group>
+        <b-form>
 
-          <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+          <b-form-group id="input-group-2" label="Seu Nome" label-for="input-2">
             <b-form-input
               id="input-2"
-              v-model="form.name"
-              placeholder="Enter name"
+              v-model="form.nome"
+              placeholder="Nome"
+              required
+            ></b-form-input>
+          </b-form-group>
+          
+          <b-form-group id="input-group-2" label="Salario:" label-for="input-2">
+            <b-form-input
+              id="input-2"
+              v-model="form.salary"
+              placeholder="Salario"
               required
             ></b-form-input>
           </b-form-group>
 
-          <b-form-group id="input-group-3" label="Food:" label-for="input-3">
+          <b-form-group id="input-group-3" label="Ativo:" label-for="input-3">
             <b-form-select
               id="input-3"
-              v-model="form.food"
-              :options="foods"
+              v-model="form.active"
+              :options="active"
               required
             ></b-form-select>
-          </b-form-group>
+          </b-form-group><br>
 
-          <b-form-group id="input-group-4" v-slot="{ ariaDescribedby }">
-            <b-form-checkbox-group
-              v-model="form.checked"
-              id="checkboxes-4"
-              :aria-describedby="ariaDescribedby"
-            >
-              <b-form-checkbox value="me">Check me out</b-form-checkbox>
-              <b-form-checkbox value="that">Check that out</b-form-checkbox>
-            </b-form-checkbox-group>
-          </b-form-group>
-
-          <b-button type="submit" variant="primary">Submit</b-button>
-          <b-button type="reset" variant="danger">Reset</b-button>
+          <b-button type="submit" variant="primary">Enviar</b-button>
+          <b-button type="reset" variant="danger">Limpar Formulário</b-button>
         </b-form>
+    </div>
+    <div>
+      <b-table striped hover :items="dados" :fields="fields"></b-table>
     </div>
   </div>
 
@@ -59,33 +46,20 @@
     data() {
       return {
         form: {
-          email: '',
-          name: '',
-          food: null,
-          checked: []
+          nome: '',
+          salary:null,
+          active: null,
         },
-        foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
-        show: true
+        active: [{ text: 'Selecione', value: null }, 'Sim', 'Não'],
+        fields: ['Nome', 'Salario', 'Ativo'],
+        dados: []
       }
     },
     methods: {
-      onSubmit(event) {
-        event.preventDefault()
-        alert(JSON.stringify(this.form))
-      },
-      onReset(event) {
-        event.preventDefault()
-        // Reset our form values
-        this.form.email = ''
-        this.form.name = ''
-        this.form.food = null
-        this.form.checked = []
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
-      }
+
+    },
+    created(){
+
     }
   }
 </script>
@@ -93,6 +67,7 @@
 <style>
 .form {
     margin-top: 10%;
+    margin:5%;
     display: flex;
     align-items: start;
     justify-content: center;
